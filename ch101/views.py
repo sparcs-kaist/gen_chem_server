@@ -11,7 +11,6 @@ from django.utils import timezone
 def notice(request):
     notice = Notice.objects.all().order_by('-event_date')
     notice = serializers.serialize('json', notice)
-    print(notice)
     return JsonResponse(notice, safe=False)
 
 def schedule(request):
