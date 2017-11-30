@@ -9,12 +9,12 @@ from django.utils import timezone
 # Create your views here.
 
 def notice(request):
-    notice = Notice.objects.all().order_by('-event_date')
+    notice = Notice.objects.all().order_by('-post_date')
     notice = serializers.serialize('json', notice)
     return JsonResponse(notice, safe=False)
 
 def schedule(request):
-    schedule = Schedule.objects.all().order_by('-event_date')
+    schedule = Schedule.objects.all().order_by('event_date')
     schedule = serializers.serialize('json', schedule)
     return JsonResponse(schedule, safe=False)
 

@@ -1,24 +1,40 @@
 # Create your views here.
 from django.shortcuts import render
 from django.http import JsonResponse
+from ch102.models import *
+from django.core import serializers
+from datetime import datetime
+from django.utils import timezone
 
 
 # Create your views here.
 
 def notice(request):
-    return JsonResponse({'notice': 'bar'})
+    notice = Notice.objects.all().order_by('-post_date')
+    notice = serializers.serialize('json', notice)
+    return JsonResponse(notice, safe=False)
 
 def schedule(request):
-    return JsonResponse({'schedule': 'bar'})
+    schedule = Schedule.objects.all().order_by('event_date')
+    schedule = serializers.serialize('json', schedule)
+    return JsonResponse(schedule, safe=False)
 
 def evaluation(request):
-    return JsonResponse({'evaluation': 'bar'})
+    evaluation = Evaluation.objects.all()
+    evaluation = serializers.serialize('json', evaluation)
+    return JsonResponse(evaluation, safe=False)
 
 def links(request):
-    return JsonResponse({'links': 'bar'})
+    links = Links.objects.all()
+    links = serializers.serialize('json', links)
+    return JsonResponse(links, safe=False)
 
 def safety(request):
-    return JsonResponse({'safety': 'bar'})
+    safety = Safety.objects.all()
+    safety = serializers.serialize('json', safety)
+    return JsonResponse(safety, safe=False)
 
 def contact(request):
-    return JsonResponse({'contact': 'bar'})
+    contact = Contact.objects.all().order_by('name')
+    contact = serializers.serialize('json', contact)
+    return JsonResponse(contact, safe=False)

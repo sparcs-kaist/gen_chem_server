@@ -3,14 +3,14 @@ from django.db import models
 # Create your models here.
 
 
-class notice(models.Model):
+class Notice(models.Model):
     title = models.TextField()
     description = models.TextField()
     event_date = models.DateTimeField()
     post_date = models.DateTimeField()
 
 
-class schedule(models.Model):
+class Schedule(models.Model):
     title = models.TextField()
     description = models.TextField()
     event_date = models.DateTimeField()
@@ -18,21 +18,21 @@ class schedule(models.Model):
     class_name = models.TextField()
 
 
-class evaluation(models.Model):
+class Evaluation(models.Model):
     description = models.TextField()
 
 
-class safety(models.Model):
+class Safety(models.Model):
     description = models.TextField()
 
 
-class links(models.Model):
+class Links(models.Model):
     title = models.TextField()
     description = models.TextField()
     link = models.TextField()
 
 
-class contact(models.Model):
+class Contact(models.Model):
     name = models.TextField()
     phone = models.TextField()
     email = models.TextField()
