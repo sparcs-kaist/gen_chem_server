@@ -4,9 +4,18 @@ from ch101.models import *
 from django.core import serializers
 from datetime import datetime
 from django.utils import timezone
+from django.conf import settings
 
+import ast
 
 # Create your views here.
+
+def CORSAllowResponse(response):
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "3600"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
 
 def notice(request):
     notice = Notice.objects.all().order_by('-post_date')
@@ -19,9 +28,15 @@ def schedule(request):
     return JsonResponse(schedule, safe=False)
 
 def download(request):
-    download = Download.objects.all().order_by('-date')
-    download = serializers.serialize('json', download)
-    return JsonResponse(download, safe=False)
+    download = {}
+    download ["media_url"] = settings.MEDIA_URL
+
+    data = Download.objects.all().order_by('-year')
+    data = serializers.serialize('json', data)
+    download ["data"] = ast.literal_eval (data)
+
+    response = JsonResponse(download, safe=False)
+    return CORSAllowResponse (response)
 
 def contact(request):
     contact = Contact.objects.all().order_by('name')
