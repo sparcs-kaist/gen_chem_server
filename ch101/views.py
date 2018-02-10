@@ -9,6 +9,12 @@ from django.conf import settings
 import ast
 
 # Create your views here.
+def CORSAllowResponse(response):
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "3600"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
 
 def CORSAllowResponse(response):
     response["Access-Control-Allow-Origin"] = "*"

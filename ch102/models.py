@@ -27,9 +27,16 @@ class Safety(models.Model):
 
 
 class Links(models.Model):
-    title = models.TextField()
-    description = models.TextField()
-    link = models.TextField()
+    title = models.CharField(
+        null=False,
+        blank=False,
+        max_length=50,
+    )
+    description = models.TextField(
+        null=False,
+        blank=True,
+    )
+    link = models.URLField()
 
 
 class Contact(models.Model):
