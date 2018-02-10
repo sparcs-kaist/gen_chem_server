@@ -7,6 +7,12 @@ from django.utils import timezone
 
 
 # Create your views here.
+def CORSAllowResponse(response):
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "3600"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
 
 def notice(request):
     notice = Notice.objects.all().order_by('-post_date')
