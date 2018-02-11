@@ -1,6 +1,8 @@
 from django.db import models
+from django.dispatch import receiver
 
 import time
+import os
 
 # Create your models here.
 
@@ -55,3 +57,10 @@ class Contact(models.Model):
     phone = models.TextField()
     email = models.TextField()
     picture = models.TextField()
+
+
+@receiver(models.signals.post_delete, sender = Download)
+def auto_delete_file_on_delete (sender, instance, **kwargs):
+    if instance.file:
+        if os.path.isfile (instance.file.path):
+            os.remove (instance.file.path)
