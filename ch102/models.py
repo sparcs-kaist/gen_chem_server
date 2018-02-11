@@ -11,11 +11,17 @@ class Notice(models.Model):
 
 
 class Schedule(models.Model):
-    title = models.TextField()
-    description = models.TextField()
+    title = models.CharField(
+        max_length=15
+    )
+    type = models.CharField(
+        max_length=15,
+    )
+    class_name = models.CharField(
+        max_length=15,
+    )
     event_date = models.DateTimeField()
-    type = models.TextField()
-    class_name = models.TextField()
+    description = models.TextField()
 
 
 class Evaluation(models.Model):
