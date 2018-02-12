@@ -25,7 +25,8 @@ def notice(request):
 def schedule(request):
     schedule = Schedule.objects.all().order_by('event_date')
     schedule = serializers.serialize('json', schedule)
-    return JsonResponse(schedule, safe=False)
+    response = JsonResponse(schedule, safe=False)
+    return CORSAllowResponse(response)
 
 def download(request):
     download = {}
