@@ -4,18 +4,50 @@ from django.db import models
 
 basic_file_path = 'ch102/download'
 
-def file_path(field_no):
+def file_path_1(instance, filename):
+    title = instance.title
 
-    def file_path_with_field_no(instance, filename):
-        title = instance.title
+    path = basic_file_path
+    path += '/' + title + '/' + str(1) + '/'
+    path += filename
 
-        path = basic_file_path
-        path += '/' + title + '/' + str(field_no) + '/'
-        path += filename
+    return path
 
-        return path
+def file_path_2(instance, filename):
+    title = instance.title
 
-    return file_path_with_field_no
+    path = basic_file_path
+    path += '/' + title + '/' + str(2) + '/'
+    path += filename
+
+    return path
+
+def file_path_3(instance, filename):
+    title = instance.title
+
+    path = basic_file_path
+    path += '/' + title + '/' + str(3) + '/'
+    path += filename
+
+    return path
+
+def file_path_4(instance, filename):
+    title = instance.title
+
+    path = basic_file_path
+    path += '/' + title + '/' + str(4) + '/'
+    path += filename
+
+    return path
+
+def file_path_5(instance, filename):
+    title = instance.title
+
+    path = basic_file_path
+    path += '/' + title + '/' + str(5) + '/'
+    path += filename
+
+    return path
 
 
 class Notice(models.Model):
@@ -63,6 +95,7 @@ class Safety(models.Model):
 
 
 class Links(models.Model):
+
     title = models.CharField(
         null=False,
         blank=False,
@@ -75,23 +108,23 @@ class Links(models.Model):
         null=True,
     )
     file1 = models.FileField(
-        upload_to=file_path(1),
+        upload_to=file_path_1,
         null=True,
     )
     file2 = models.FileField(
-        upload_to=file_path(2),
+        upload_to=file_path_2,
         null=True,
     )
     file3 = models.FileField(
-        upload_to=file_path(3),
+        upload_to=file_path_3,
         null=True,
     )
     file4 = models.FileField(
-        upload_to=file_path(4),
+        upload_to=file_path_4,
         null=True,
     )
     file5 = models.FileField(
-        upload_to=file_path(5),
+        upload_to=file_path_5,
         null=True,
     )
 
