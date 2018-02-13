@@ -2,6 +2,21 @@ from django.db import models
 
 # Create your models here.
 
+basic_file_path = 'ch102/download'
+
+def file_path(field_no):
+
+    def file_path_with_field_no(instance, filename):
+        title = instance.title
+
+        path = basic_file_path
+        path += '/' + title + '/' + str(field_no) + '/'
+        path += filename
+
+        return path
+
+    return file_path_with_field_no
+
 
 class Notice(models.Model):
     title = models.TextField()
@@ -54,10 +69,31 @@ class Links(models.Model):
         max_length=50,
     )
     description = models.TextField(
-        null=False,
-        blank=True,
+        null=True,
     )
-    link = models.URLField()
+    link = models.URLField(
+        null=True,
+    )
+    file1 = models.FileField(
+        upload_to=file_path(1),
+        null=True,
+    )
+    file2 = models.FileField(
+        upload_to=file_path(2),
+        null=True,
+    )
+    file3 = models.FileField(
+        upload_to=file_path(3),
+        null=True,
+    )
+    file4 = models.FileField(
+        upload_to=file_path(4),
+        null=True,
+    )
+    file5 = models.FileField(
+        upload_to=file_path(5),
+        null=True,
+    )
 
 
 class Contact(models.Model):
