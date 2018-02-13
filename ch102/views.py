@@ -30,7 +30,14 @@ def schedule(request):
 def evaluation(request):
     evaluation = Evaluation.objects.all()
     evaluation = serializers.serialize('json', evaluation)
-    return JsonResponse(evaluation, safe=False)
+    response =  JsonResponse(evaluation, safe=False)
+    return CORSAllowResponse(response)
+
+def safety(request):
+    safety = Safety.objects.all()
+    safety = serializers.serialize('json', safety)
+    response =  JsonResponse(safety, safe=False)
+    return CORSAllowResponse(response)
 
 def links(request):
     links = Links.objects.all()
@@ -38,10 +45,6 @@ def links(request):
     response = JsonResponse(links, safe=False)
     return CORSAllowResponse(response)
 
-def safety(request):
-    safety = Safety.objects.all()
-    safety = serializers.serialize('json', safety)
-    return JsonResponse(safety, safe=False)
 
 def contact(request):
     contact = Contact.objects.all().order_by('name')

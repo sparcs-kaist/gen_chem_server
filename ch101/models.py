@@ -7,6 +7,8 @@ import os
 # Create your models here.
 
 basic_file_path = 'ch101/download'
+
+
 def file_path (instance, filename):
     (year, name) = (instance.year, instance.name)
 
@@ -27,11 +29,31 @@ class Notice(models.Model):
 
 
 class Schedule(models.Model):
-    title = models.TextField()
-    description = models.TextField()
+    type = models.CharField(
+        max_length=15,
+        choices=(
+            ('exam', 'exam'),
+            ('quiz', 'quiz'),
+            ('recitation', 'recitation'),
+            ('lecture', 'lecture'),
+        )
+    )
     event_date = models.DateTimeField()
-    type = models.TextField()
-    class_name = models.TextField()
+    description = models.TextField()
+
+
+class Evaluation(models.Model):
+    title = models.CharField(
+        max_length=100
+    )
+    description = models.TextField()
+
+
+class Safety(models.Model):
+    title = models.CharField(
+        max_length=100
+    )
+    description = models.TextField()
 
 
 class Download(models.Model):

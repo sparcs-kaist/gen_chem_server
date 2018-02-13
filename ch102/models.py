@@ -11,24 +11,30 @@ class Notice(models.Model):
 
 
 class Schedule(models.Model):
-    title = models.CharField(
-        max_length=15
-    )
     type = models.CharField(
         max_length=15,
-    )
-    class_name = models.CharField(
-        max_length=15,
+        choices=(
+            ('exam', 'exam'),
+            ('quiz', 'quiz'),
+            ('recitation', 'recitation'),
+            ('lab', 'lab'),
+        )
     )
     event_date = models.DateTimeField()
     description = models.TextField()
 
 
 class Evaluation(models.Model):
+    title = models.CharField(
+        max_length=100
+    )
     description = models.TextField()
 
 
 class Safety(models.Model):
+    title = models.CharField(
+        max_length=100
+    )
     description = models.TextField()
 
 

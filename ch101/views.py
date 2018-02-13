@@ -28,6 +28,18 @@ def schedule(request):
     response = JsonResponse(schedule, safe=False)
     return CORSAllowResponse(response)
 
+def evaluation(request):
+    evaluation = Evaluation.objects.all()
+    evaluation = serializers.serialize('json', evaluation)
+    response =  JsonResponse(evaluation, safe=False)
+    return CORSAllowResponse(response)
+
+def safety(request):
+    safety = Safety.objects.all()
+    safety = serializers.serialize('json', safety)
+    response =  JsonResponse(safety, safe=False)
+    return CORSAllowResponse(response)
+
 def download(request):
     download = {}
     download ["media_url"] = settings.MEDIA_URL
