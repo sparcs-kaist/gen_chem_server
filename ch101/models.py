@@ -41,19 +41,8 @@ class Schedule(models.Model):
     event_date = models.DateTimeField()
     description = models.TextField()
 
-
-class Evaluation(models.Model):
-    title = models.CharField(
-        max_length=100
-    )
-    description = models.TextField()
-
-
-class Safety(models.Model):
-    title = models.CharField(
-        max_length=100
-    )
-    description = models.TextField()
+    def __str__(self):
+        return str(self.event_date)
 
 
 class Download(models.Model):
